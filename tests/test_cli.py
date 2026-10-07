@@ -40,3 +40,13 @@ def test_help_and_unknown_command(monkeypatch, capsys):
     assert "Commands:" in output
     assert "Unknown command." in output
     assert output.endswith("Goodbye!\n")
+
+def test_mixed_case_arithmetic_command(monkeypatch, capsys):
+    output = session(
+        monkeypatch,
+        capsys,
+        ["  AdD  ", "12", "8", "exit"]
+    )
+
+    assert "Result: 20" in output
+    assert output.endswith("Goodbye!\n")
