@@ -12,7 +12,6 @@ HELP = """Commands:
 
 
 def describe(calculation: Calculation) -> str:
-    """Format an object through its common interface."""
     return (
         f"{type(calculation).__name__}: "
         f"{calculation.a:g}, {calculation.b:g} = {calculation.get_result():g}"
@@ -38,11 +37,15 @@ def run() -> None:
         if command == "exit":
             break
         if command in operations:
-            a = float(input("First number: "))
-            b = float(input("Second number: "))
-            operation_class = operations[command]
-            #History does not need any arithmetic logic because calculation classes are already responsible for it. history only manages calculation objects by storing, retrieving, and removing them
-            calculation = operation_class(a, b) 
+            try:
+                a = float(input("First number: "))
+                b = float(input("Second number: "))
+                operation_class = operations[command]
+                #History does not need any arithmetic logic because calculation classes are already responsible for it. history only manages calculation objects by storing, retrieving, and removing them
+                calculation = operation_class(a, b) 
+            except ValueError:
+                print("Invalid number or result. Please use finite numbers.")
+                continue
             history.add(calculation)
             
             print(f"Result: {calculation.get_result():g}")
