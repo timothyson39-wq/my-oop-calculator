@@ -2,6 +2,7 @@ import pytest
 
 from calculator.calculation import Add, Calculation, Subtract
 
+
 def test_add():
     calculation = Add(10, 5)
     result = calculation.get_result()
