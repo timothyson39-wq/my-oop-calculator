@@ -41,11 +41,32 @@ def test_polymorphism():
         results.append(calculation.get_result())
     assert results == [15, 13]
 
+#
 def test_three_calculations_polymorphically():
-    calculations = [Add(3, 7), Subtract(4, 10), Add(20, 5)]
+    calculations = [
+        Add(3, 7),
+        Subtract(4, 10),
+        Add(20, 5),
+    ]
 
     results = []
+
     for calculation in calculations:
         results.append(calculation.get_result())
 
     assert results == [10, -6, 25]
+
+def test_decimal_addition():
+    assert Add(0.1, 0.2).get_result() == pytest.approx(0.3)
+
+
+def test_decimal_subtraction():
+    assert Subtract(1.5, 0.25).get_result() == 1.25
+
+
+def test_subtract_two_negative_operands():
+    assert Subtract(-10, -5).get_result() == -5
+
+
+def test_subtract_zero_operands():
+    assert Subtract(0, 0).get_result() == 0
